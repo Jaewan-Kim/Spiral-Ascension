@@ -1,47 +1,57 @@
-userInput = int(input('Please enter a number(the program will crash if you dont: '))
-
-right = 1;
-down = 2;
-left = 3;
-up = 4;
-
-direction = right;
-
-current_number = 1;
-
-vec = []
+userInput = int(input('Enter a number: '));
 
 
-def left_exists(userin , current) :
-    if (current-1) % userin == 0:
-        return False;
-    else:
-        return True;
+Matrix = [[0 for x in range(userInput)] for y in range(userInput)]
 
 
-def right_exists(userin , current) :
-    if current % userin == 0:
-        return False;
-    else:
-        return True;
+current_number = 0
+hmax = userInput-1
+vmax = userInput-1
+hindex = 0
+vindex = 0
+hmin = 0
+vmin = 1
 
+squared = userInput * userInput
+right = 1
+down = 2
+up = 3
+left = 4
+direction = right
 
-def up_exists(userin , current) :
-    if (current-1) % userin == 0:
-        return False;
-    else:
-        return True;
+while current_number < squared:
+    current_number += 1
+    Matrix[vindex][hindex] = current_number
+    print(Matrix)
+    if direction==right :
+        if hindex == hmax:
+            vindex +=1
+            hmax -=1
+            direction = down
+        else:
+            hindex +=1
+    elif direction==down:
+        if vindex == vmax:
+            vmax -=1
+            hindex -=1
+            direction = left
 
+        else:
+            vindex+=1
+    elif direction == left:
+        if hindex == hmin:
+            hmin += 1
+            vindex -= 1
+            direction = up
+        else:
+            hindex -=1
+    elif direction == up:
+        if vindex == vmin:
+            vmin +=1
+            hindex +=1
+            direction= right
+        else:
+            vindex-=1
 
-def down_exists(userin , current) :
-    if current <= userin:
-        return False;
-    else:
-        return True;
-
-
-while current_number < userInput* userInput:
-    vec.insert(0,7);
-
-for int in vec:
-    print(int)
+for x in range(0,userInput):
+    print(Matrix[x])
